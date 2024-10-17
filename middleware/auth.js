@@ -6,14 +6,14 @@ module.exports = {
     const header = req.headers.authorization;
 
     if (!header) {
-      res.json("invalid header");
+      res.status(401).json("invalid header");
       return;
     }
 
     const token = header.split(" ")[1];
 
     if (!token) {
-      res.json("invalid token");
+      res.status(401).json("invalid token");
       return;
     }
 
@@ -22,7 +22,7 @@ module.exports = {
       req.payload = payload;
       next();
     } catch {
-      res.json("invalid token");
+      res.status(401).json("invalid token");
       return;
     }
   },
